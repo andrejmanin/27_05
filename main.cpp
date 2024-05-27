@@ -2,90 +2,92 @@
 
 using namespace std;
 
-void task_1() {
-    int n, k;
-    cout << "Enter n: ";
-    cin >> n;
-    cout << "Enter k: ";
-    cin >> k;
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < k; j++) {
-            cout << "* ";
+int task_1(int number, int step) {
+    if(step == 1) return number;
+    return task_1(number, step - 1) * number;
+}
+
+int sum(int number_1, int number_2) {
+    int sum = 0;
+    for(int i = number_1; i < number_2; i++) {
+        sum += i;
+    }
+    return sum;
+}
+
+void task_3(int number_1, int number_2) {
+    int sum = 0;
+    for(int i = number_1; i < number_2; i++) {
+        for (int j = 1; j < i; j++) {
+            if(i % j == 0) sum += j;
         }
-        cout << endl;
+        if(sum == i) cout << i << endl;
+        sum = 0;
     }
 }
 
-int task_2(int number) {
-    if(number == 1) {
-        return 1;
+void card(int number, char suit) {
+    cout << char(201) + string(9, char(205)) + char(187) << endl;
+    cout << char(186) << number << " " << suit << string(6, ' ') << char(186) << endl;
+    for (int i = 0; i < 7; i++) {
+        cout << char(186) << string(9, ' ') << char(186) << endl;
     }
-    else {
-        return task_2(number - 1) * number;
-    }
+    cout << char(186) << string(6, ' ') << suit << " " << number << char(186) << endl;
+    cout << char(200) + string(9, char(205)) + char(188) << endl;
 }
 
-void task_3() {
-    int number;
-    cout << "Enter number: ";
-    cin >> number;
-    for(int i = 2; i < number; i++) {
-        if(number % i == 0) {
-            cout << "Number is not prime" << endl;
-            return;
-        }
+void number(int number) {
+    int sum_1 = 0, sum_2 = 0;
+    for(int i = 0; i < 3; i++) {
+        sum_1 += number % 10;
+        number /= 10;
     }
-    cout << "Number is prime" << endl;
-}
-
-int task_4(int number) {
-    return number * number * number;
-}
-
-int task_5(int number_1, int number_2) {
-    if(number_1 > number_2) {
-        return number_1;
+    for(int i = 0; i < 3; i++) {
+        sum_2 += number % 10;
+        number /= 10;
     }
-    else {
-        return number_2;
-    }
-}
-
-bool task_6(int number) {
-    if(number > 0) return true;
-    return false;
+    if(sum_1 == sum_2) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 
 int main() {
-    //task_1();
-
-    // task_2
-    // int number;
+    // // Task 1
+    // int number, step;
     // cout << "Enter number: ";
     // cin >> number;
-    // cout << "Factorial of " << number << " is " << task_2(number) << endl;
-
-    //task_3
-    // task_3();
-
-    // task_4
-    // int number;
-    // cout << "Enter number: ";
-    // cin >> number;
-    // cout << "Cube of " << number << " is " << task_4(number) << endl;
-
-    // task_5
+    // cout << "Enter step: ";
+    // cin >> step;
+    // cout << "Result: " << task_1(number, step) << endl;
+    // cout << "-----------------------------------\n" << endl;
+    //
+    // // Task 2
     // int number_1, number_2;
     // cout << "Enter number 1: ";
     // cin >> number_1;
     // cout << "Enter number 2: ";
     // cin >> number_2;
-    // cout << "Max number is " << task_5(number_1, number_2) << endl;
+    // cout << "Sum: " << sum(number_1, number_2) << endl;
+    // cout << "-----------------------------------\n" << endl;
 
-    // task_6
-    // int number;
-    // cout << "Enter number: ";
-    // cin >> number;
-    // cout << task_6(number) << endl;
+    // Task 3
+    // cout << "Enter number 1: ";
+    // cin >> number_1;
+    // cout << "Enter number 2: ";
+    // cin >> number_2;
+    // task_3(number_1, number_2);
+    // cout << "-----------------------------------\n" << endl;
+
+    // Task 4
+    // for (int i = 1; i <= 10; i++) {
+    //     card(i, '♠');
+    //     cout << endl;
+    // }
+
+    // Task 5
+    int num;
+    cout << "Enter number: ";
+    cin >> num;
+    number(num);
+
     return 0;
 }
